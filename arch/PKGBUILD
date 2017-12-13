@@ -1,0 +1,88 @@
+# Maintainer: David Herrmann <dh.herrmann@gmail.com>
+
+_pkgorg=dvdhrm
+_pkgname=mgmt
+pkgdesc='System Management'
+pkgver=r3.ce6944b
+pkgrel=1
+
+pkgname=dvdhrm-$_pkgname-git
+arch=('i686' 'x86_64')
+url="https://github.com/$_pkgorg/$_pkgname"
+license=('Apache')
+provides=("dvdhrm-$_pkgname")
+conflicts=("dvdhrm-$_pkgname")
+
+depends=(
+  'ack'
+  'arch-install-scripts'
+  'awesome'
+  'chromium'
+  'cower'
+  'dialog'
+  'editorconfig-core-c'
+  'editorconfig-vim'
+  'feh'
+  'firefox'
+  'git'
+  'gnome-keyring'
+  'gnome-terminal'
+  'htop'
+  'lightdm'
+  'lightdm-gtk-greeter'
+  'networkmanager'
+  'openssh'
+  'openvpn'
+  'pavucontrol'
+  'perl-authen-sasl'
+  'perl-mime-tools'
+  'perl-net-smtp-ssl'
+  'pkgbuild-introspection'
+  'pulseaudio'
+  'qemu-user-static-bin'
+  'rustup'
+  'telegram-desktop-bin'
+  'ttf-dejavu'
+  'valgrind'
+  'vicious'
+  'vim'
+  'zathura'
+  'zathura-pdf-poppler'
+)
+
+makedepends=(
+  'git'
+  'meson'
+)
+
+source=("$pkgname::git+https://github.com/$_pkgorg/$_pkgname")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  rm -Rf build
+  mkdir build
+}
+
+build() {
+  cd build
+  arch-meson ../$pkgname
+  ninja
+}
+
+check() {
+  cd build
+  meson test
+}
+
+package() {
+  cd build
+  DESTDIR="$pkgdir" ninja install
+  cp -Tdpr --no-preserve=ownership "../$pkgname/overlay/" "$pkgdir"
+}
+
+# vim:set sw=2 et:
