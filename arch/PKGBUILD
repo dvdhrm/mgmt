@@ -3,7 +3,7 @@
 _pkgorg=dvdhrm
 _pkgname=mgmt
 pkgdesc='System Management'
-pkgver=r6.5b31e74
+pkgver=r7.801c9f1
 pkgrel=1
 
 pkgname=dvdhrm-$_pkgname-git
@@ -44,7 +44,6 @@ depends=(
   'perl-mime-tools'
   'perl-net-smtp-ssl'
   'pipewire'
-  'pipewire-pulse'
   'pulseaudio'
   'python-docutils'
   'rustup'
