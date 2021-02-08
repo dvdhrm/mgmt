@@ -1,0 +1,81 @@
+# Read `man 5 sway` for a complete reference.
+
+set $mod Mod4
+
+set $term termite
+set $background /usr/share/dvdhrm/images/background.jpg
+
+bindsym $mod+Return exec $term
+bindsym $mod+w kill
+bindsym $mod+r exec wofi --show run,drun
+floating_modifier $mod normal
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+q exit
+bindsym $mod+Shift+l exec swaylock -i $background -s fill
+
+bindsym $mod+tab focus right
+bindsym $mod+Shift+tab focus left
+
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+h splith
+bindsym $mod+v splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+default_border normal
+workspace_layout tabbed
+
+output * bg $background fill
+
+bar {
+	position top
+	swaybar_command waybar
+}
+
+input * {
+	repeat_delay 250
+	repeat_rate 30
+	xkb_layout "de"
+	xkb_variant "nodeadkeys"
+	xkb_options "compose:prsc"
+}
+
+include /etc/sway/config.d/*

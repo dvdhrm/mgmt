@@ -1,0 +1,7 @@
+ - OpenVPN
+   - Import OpenVPN Configuration:
+       nmcli connection import type openvpn file /path/to/your.ovpn
+   - Set the default username:
+       nmcli connection modify <con> +vpn.data username=<username>
+   - Never use as default gateway:
+       nmcli connection modify <con> ipv4.never-default true
